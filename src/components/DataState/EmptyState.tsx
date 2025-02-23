@@ -1,19 +1,22 @@
-import { List } from "@chakra-ui/react";
-import { EmptyState as ChEmptyState } from "@/components/ui/empty-state";
-import { HiColorSwatch } from "react-icons/hi";
+import { EmptyState, VStack } from "@chakra-ui/react";
+import { LuShoppingCart } from "react-icons/lu";
 
-const EmptyState = () => (
-  <ChEmptyState
-    py={5}
-    icon={<HiColorSwatch />}
-    title="No results found"
-    description="Try adjusting your search"
-  >
-    <List.Root variant="marker">
-      <List.Item>Try removing filters</List.Item>
-      <List.Item>Try different keywords</List.Item>
-    </List.Root>
-  </ChEmptyState>
-);
+const MyEmptyState = () => {
+  return (
+    <EmptyState.Root>
+      <EmptyState.Content>
+        <EmptyState.Indicator>
+          <LuShoppingCart />
+        </EmptyState.Indicator>
+        <VStack textAlign="center">
+          <EmptyState.Title>Your cart is empty</EmptyState.Title>
+          <EmptyState.Description>
+            Explore our products and add items to your cart
+          </EmptyState.Description>
+        </VStack>
+      </EmptyState.Content>
+    </EmptyState.Root>
+  );
+};
 
-export default EmptyState;
+export default MyEmptyState;

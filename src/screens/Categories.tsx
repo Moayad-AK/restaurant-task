@@ -4,12 +4,12 @@ import useFetchCategories from "../hooks/useFetchCategories";
 import LoadingState from "../components/DataState/LoadingState";
 import ErrorState from "../components/DataState/ErrorState";
 import { useNavigate } from "react-router-dom";
+import MyEmptyState from "../components/DataState/EmptyState";
 
 const CategoriesPage: React.FC = () => {
   const navigate = useNavigate();
   const { data, error, isLoading } = useFetchCategories();
   const categories = data?.data.categories ?? [];
-  console.log("string", data);
 
   if (isLoading) {
     return <LoadingState />;
@@ -17,6 +17,10 @@ const CategoriesPage: React.FC = () => {
 
   if (error) {
     return <ErrorState message={error.message} />;
+  }
+
+  if (categories.length === 0) {
+    return <MyEmptyState />;
   }
 
   return (

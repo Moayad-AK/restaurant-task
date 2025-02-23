@@ -16,6 +16,7 @@ import { useState } from "react";
 import ItemDetailDialog from "../components/itemDetailDialog";
 import { Item } from "../types/items";
 import { useParams } from "react-router-dom";
+import MyEmptyState from "../components/DataState/EmptyState";
 
 const ItemsListPage = () => {
   const { id } = useParams();
@@ -32,6 +33,11 @@ const ItemsListPage = () => {
 
   const items = data?.pages.flatMap((page) => page.data.items.data) ?? [];
 
+  const handleItemClick = (item: Item) => {
+    setSelectedItem(item);
+    onOpen();
+  };
+
   if (isLoading) {
     return <LoadingState />;
   }
@@ -39,10 +45,10 @@ const ItemsListPage = () => {
   if (error) {
     return <ErrorState message={error.message} />;
   }
-  const handleItemClick = (item: Item) => {
-    setSelectedItem(item);
-    onOpen();
-  };
+
+  if (items.length === 0) {
+    return <MyEmptyState />;
+  }
 
   return (
     <Box mb={20}>
