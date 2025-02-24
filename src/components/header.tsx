@@ -1,8 +1,16 @@
-import { Badge, HStack, IconButton, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  HStack,
+  IconButton,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import { FaHome, FaSearch, FaShoppingCart, FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { QuantityPriceContext } from "../context/cartContext";
+import handleWhatsappClick from "../utils/whatsappLink";
+import SearchDialog from "./searchDialog";
 
 interface IProp {
   isMobile: boolean;
@@ -11,7 +19,7 @@ interface IProp {
 const Header = ({ isMobile }: IProp) => {
   const navigate = useNavigate();
   const { quantity } = useContext(QuantityPriceContext);
-  console.log("q", quantity);
+  const { open, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -32,10 +40,20 @@ const Header = ({ isMobile }: IProp) => {
             >
               <FaHome />
             </IconButton>
-            <IconButton aria-label="Search" variant="ghost" color="white">
+            <IconButton
+              aria-label="Search"
+              variant="ghost"
+              color="white"
+              onClick={onOpen}
+            >
               <FaSearch />
             </IconButton>
-            <IconButton aria-label="Contact" variant="ghost" color="white">
+            <IconButton
+              aria-label="Contact"
+              variant="ghost"
+              color="white"
+              onClick={handleWhatsappClick}
+            >
               <FaWhatsapp />
             </IconButton>
           </HStack>
@@ -48,6 +66,7 @@ const Header = ({ isMobile }: IProp) => {
           variant="ghost"
           color="white"
           position="relative"
+          disabled
         >
           <FaShoppingCart />
           <Badge
@@ -64,6 +83,7 @@ const Header = ({ isMobile }: IProp) => {
           </Badge>
         </IconButton>
       </HStack>
+      <SearchDialog onClose={onClose} open={open} />
     </>
   );
 };
