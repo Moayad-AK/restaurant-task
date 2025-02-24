@@ -1,17 +1,17 @@
 import { EmptyState, VStack } from "@chakra-ui/react";
-import { LuShoppingCart } from "react-icons/lu";
+import { PiEmptyBold } from "react-icons/pi";
 
 const MyEmptyState = () => {
   return (
     <EmptyState.Root>
       <EmptyState.Content>
         <EmptyState.Indicator>
-          <LuShoppingCart />
+          <PiEmptyBold />
         </EmptyState.Indicator>
         <VStack textAlign="center">
-          <EmptyState.Title>Your cart is empty</EmptyState.Title>
+          <EmptyState.Title>Your category is empty</EmptyState.Title>
           <EmptyState.Description>
-            Explore our products and add items to your cart
+            Chose another category you must not drink for your health
           </EmptyState.Description>
         </VStack>
       </EmptyState.Content>
